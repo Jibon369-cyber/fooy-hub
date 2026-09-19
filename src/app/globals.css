@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@plugin "daisyui";
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -23,4 +25,138 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================
+   Hero Animation
+========================= */
+
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-text {
+  animation: slideFromLeft 0.8s ease-out;
+}
+
+.hero-image {
+  animation: slideFromRight 0.8s ease-out;
+}
+
+
+/* =========================
+   Popular Foods Carousel
+========================= */
+
+.food-carousel {
+  position: relative;
+  max-width: 1200px;
+  height: 500px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.food-card {
+  position: absolute;
+  width: 280px;
+
+  transition:
+    transform 0.8s ease,
+    opacity 0.8s ease,
+    filter 0.8s ease;
+}
+
+
+/* Center Card */
+
+.food-center {
+  transform: translateX(0) scale(1.15);
+  filter: blur(0);
+  opacity: 1;
+  z-index: 3;
+}
+
+
+/* Left Card */
+
+.food-left {
+  transform: translateX(-330px) scale(0.85);
+  filter: blur(3px);
+  opacity: 0.65;
+  z-index: 2;
+}
+
+
+/* Right Card */
+
+.food-right {
+  transform: translateX(330px) scale(0.85);
+  filter: blur(3px);
+  opacity: 0.65;
+  z-index: 2;
+}
+
+
+/* Other Cards */
+
+.food-hidden {
+  transform: scale(0.7);
+  filter: blur(6px);
+  opacity: 0;
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 768px) {
+  .food-carousel {
+    height: 480px;
+  }
+
+  .food-card {
+    width: 280px;
+  }
+
+  .food-center {
+    transform: translateX(0) scale(1);
+  }
+
+  .food-left {
+    transform: translateX(-120px) scale(0.75);
+    opacity: 0.35;
+  }
+
+  .food-right {
+    transform: translateX(120px) scale(0.75);
+    opacity: 0.35;
+  }
 }
